@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>let we move your finger</title>
+    <style>
+        body {
+            background-color: rgb(255, 196, 33);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            font-size: 24px;
+        }
+        .title {
+            font-size: 50px;
+        }
+        .s {
+            font-size: 30px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 100px);
+            grid-template-rows: repeat(5, 100px);
+            gap: 5px;
+        }
+        .square {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .highlight {
+            background-color: #0849d6;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">let we move your finger</div>
+    <div class="s">Prees the dip blue block</div>
+    <div class="grid" id="grid">
+        <!-- 生成25個方塊 -->
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+    </div>
+
+    <!-- 準備音效 -->
+    <audio id="shootSound" src="shoot.wav"></audio>
+
+    <script>
+        const squares = document.querySelectorAll('.square');
+        const shootSound = document.getElementById('shootSound');
+        let currentActive = null;
+
+        function getRandomSquare() {
+            let randomSquare;
+            do {
+                const randomIndex = Math.floor(Math.random() * squares.length);
+                randomSquare = squares[randomIndex];
+            } while (randomSquare === currentActive); // 如果隨機到的是當前高亮的方塊，繼續隨機選擇
+            return randomSquare;
+        }
+
+        function activateRandomSquare() {
+            if (currentActive) {
+                currentActive.classList.remove('highlight');
+            }
+            const randomSquare = getRandomSquare();
+            randomSquare.classList.add('highlight');
+            currentActive = randomSquare;
+        }
+
+        squares.forEach(square => {
+            square.addEventListener('click', () => {
+                if (square === currentActive) {
+                    // 播放音效
+                    shootSound.play();
+                    activateRandomSquare();
+                }
+            });
+        });
+
+        // 初次啟動隨機方塊
+        activateRandomSquare();
+    </script>
+</body>
+</html>

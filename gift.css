@@ -1,0 +1,61 @@
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    /* 關鍵：讓內容由上往下排列 */
+    flex-direction: column; 
+    /* 水平置中 */
+    justify-content: center; 
+    /* 垂直置中 */
+    align-items: center;     
+    background: #ff8eaa;
+    font-family: Arial, sans-serif;
+}
+
+.scratch-container {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    /* 移除之前的負 margin-left */
+}
+
+.hidden-message {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;  
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #28a745, #218838);
+    user-select: none;  
+    pointer-events: none;
+}
+
+canvas {
+    position: absolute;
+    inset: 0;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+/* 移除所有歪掉的 margin，改用簡單的間距 */
+h1 {
+    margin: 10px 0;
+    color: #ffffff;
+}
+
+h2 {
+    margin-top: 20px;
+    font-size: 6rem;
+}
+
+h3 {
+    color: #ffcedc;
+    margin: 0 0 20px 0;
+}

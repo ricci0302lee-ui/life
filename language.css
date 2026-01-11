@@ -1,0 +1,481 @@
+/* --- 全域設定 --- */
+body {
+    min-height: 100vh;
+    margin: 0;
+    /* 背景：從右到左的薄荷綠漸層 */
+    background: linear-gradient(to left, #b7ffdc, #ffffff);
+    font-family: 'Segoe UI', 'Montserrat', 'cheee', 'sheko', sans-serif;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* --- 導覽列 Navbar --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: rgba(255, 255, 255, 0.4); /* 半透明白 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-weight: bold;
+    color: #333;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* --- 導覽列按鈕 --- */
+.btn-home {
+    background-color: #b7ffdc;
+    color: #333;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-imformation {
+    background-color: #b7ffdc;
+    color: #333;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: 900;
+}
+
+.btn-imformation:hover {
+    background-color: #98e6c4;
+    transform: scale(1.1);
+}
+
+.btn-go {
+    background-color: #b7ffdc;
+    color: #333;
+    text-decoration: none;
+    padding: 8px 25px;
+    border-radius: 12px;
+    font-weight: 900;
+    transition: 0.3s;
+}
+
+.btn-home:hover, .btn-go:hover {
+    background-color: #98e6c4;
+    transform: scale(1.1);
+}
+
+
+
+/* --- 首頁 Hero 區域佈局 --- */
+.hero {
+    display: flex;
+    align-items: center; /* 保持垂直居中作為基準 */
+    justify-content: space-between;
+    padding: 40px 5% 80px 5%; /* 減少上方 padding (80px -> 40px)，讓內容整體往上靠 */
+    gap: 40px;
+}
+
+/* --- 文字區：往上移動 --- */
+.hero-text {
+    flex: 1;
+    margin-top: -200px; /* 使用負值 margin 讓文字向上漂浮 */
+}
+
+/* --- 左側文字與進場動畫 --- */
+.main-title {
+    color: #ff8f04;
+    font-size: 4rem;
+    margin-bottom: 0;
+    font-weight: 900;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.sub-title {
+    color: #ff8f04;
+    font-size: 2.5rem;
+    margin-top: 10px;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- 右側照片區域 --- */
+.hero-images {
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+    margin-top: 120px; /* 增加頂部間距，讓兩張照片整體下沉 */
+    margin-top: 150px;
+}
+
+/* 第一張照片的額外偏移（保留你原本要求的錯落感） */
+.group-1 {
+    margin-top: 60px; 
+}
+
+/* 第一張照片向下偏移 */
+.group-1 {
+    margin-top: 60px;
+}
+
+/* 照片本身樣式：加入白框與透明度 */
+.promo-img {
+    width: 380px; /* 寬度可視需要調整 */
+    height: auto;
+    border-radius: 33px;
+    
+    /* 1. 白框設定 */
+
+    
+    /* 3. 陰影讓白框更有質感 */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+
+    
+    /* 確保邊框寬度計算在內 */
+    box-sizing: border-box;
+    
+    /* 滑鼠移上去稍微變亮 */
+    transition: opacity 0.3s ease;
+
+    transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+
+    opacity: 0.3;
+    
+    /* 確保縮放時不會被切到邊緣 */
+    cursor: pointer;
+}
+
+.promo-img:hover {
+    opacity: 1;
+    transform: scale(1.13);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* 照片下方的文字說明 */
+.img-caption {
+    margin-top: 50px;
+    font-size: 30px;
+    color: #ff8f04;
+    font-weight: 900;
+    opacity: 0;
+    animation: fadeInUp 0.9s ease-out forwards;
+}
+
+.img-content {
+    margin-top: -10px;
+    font-size: 20px;
+    color: #666;
+    font-weight: 900;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+
+
+
+.activity {
+    margin-top: 300px;
+    text-align: center;
+    font-size: 70px;
+    font-weight: 900;
+    
+    /* 使用 Bungee 字體 */
+    font-family: 'Bungee', monospace;
+    
+    /* 漸層字體設定 */
+    background: linear-gradient(to right, #3777ff, #e51c83);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    /* 動畫 */
+}
+/* 外層容器：讓三個長方形橫向排列並置中 */
+.container {
+  display: flex;
+  align-items: center; /* 垂直方向居中，讓中間大的突出來 */
+  justify-content: center;
+  gap: 20px; /* 長方形之間的間距 */
+  padding: 50px;
+}
+
+/* 通用長方形樣式 */
+.card {
+  margin-top: 10px;
+  background-color: #ffffff;
+  padding: 20px;
+  text-align: center; /* 文字水平居中 */
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 文字靠上 */
+}
+
+/* 標題與內容文字顏色 */
+.card h3 {
+    font-size: 35px;
+  color: #000000;
+  margin-top: 0;
+}
+
+.card p {
+    font-size: 20px;
+  color: #2e2e2e;
+}
+
+/* 兩旁長方形：邊框細，顏色 #434343 */
+.side-card {
+  opacity: 0.5;
+  height: 450px;
+  width: 260px;  /* 比旁邊的寬一點 */
+  border: 1px solid #434343;
+  border-radius: 25px;
+  opacity: 0.3;
+  transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+}
+
+
+/* 中間長方形：尺寸較大，邊框較粗，顏色 #ffbc04 */
+.middle-card {
+  opacity: 0.7;
+  height: 500px; /* 比旁邊的高一點 */
+  width: 300px;  /* 比旁邊的寬一點 */
+  border: 4px solid #ffbc04;
+  z-index: 1; /* 確保它在視覺上最突出 */
+  border-radius: 25px;
+  opacity: 0.3;
+  transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+}
+
+.side-card:hover{
+    opacity: 0.8;
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+}
+
+.middle-card:hover {
+    opacity: 0.9;
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+/* 外層容器：讓三個長方形橫向排列並置中 */
+.server {
+  display: flex;
+  align-items: center; /* 垂直方向居中，讓中間大的突出來 */
+  justify-content: center;
+  gap: 20px; /* 長方形之間的間距 */
+  background: linear-gradient(to left, #ffffff, #b7ffdc);
+  padding: 50px;
+}
+
+/* 通用長方形樣式 */
+.server-card {
+  padding: 20px;
+  text-align: center; /* 文字水平居中 */
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 文字靠上 */
+}
+
+/* 標題與內容文字顏色 */
+.imformation {
+    text-align: center;
+    font-size: 30px;
+    
+    /* 使用 Bungee 字體 */
+    font-family: 'Courier New', monospace;
+    
+    /* 漸層字體設定 */
+    background: linear-gradient(to right, #3777ff, #e51c83);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    /* 動畫 */
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.photo2 {
+    background: linear-gradient(to right, #3777ff, #e51c83);
+}
+.photo {
+    display: flex;
+    margin-left: 982px;
+}
+
+.ender {
+    display: flex;
+    margin-left: 300px;
+    margin-top: -880px; /* 數值越大，往上移越多 */
+    /* margin-bottom: 900px;  這行如果不需要留白可以刪除 */
+    
+}
+.img-btn {
+    background: none;    /* 去除背景色 */
+    border: none;        /* 去除邊框 */
+    padding: 0;          /* 去除內距 */
+    cursor: pointer;     /* 讓滑鼠移上去時變成「手指」形狀 */
+    outline: none;       /* 去除點擊時的外框 */
+}
+
+/*不同照片按鈕*/
+
+.eye {
+    display: flex;
+    margin-left: 300px;
+    margin-top: 60px;
+    /* margin-bottom: 900px;  這行如果不需要留白可以刪除 */
+    
+}
+.img-btn {
+    background: none;    /* 去除背景色 */
+    border: none;        /* 去除邊框 */
+    padding: 0;          /* 去除內距 */
+    cursor: pointer;     /* 讓滑鼠移上去時變成「手指」形狀 */
+    outline: none;       /* 去除點擊時的外框 */
+}
+
+/*不同照片按鈕*/
+
+.magma {
+    display: flex;
+    margin-left: 300px;
+    margin-top: 60px;
+    /* margin-bottom: 900px;  這行如果不需要留白可以刪除 */
+    
+}
+.img-btn {
+    background: none;    /* 去除背景色 */
+    border: none;        /* 去除邊框 */
+    padding: 0;          /* 去除內距 */
+    cursor: pointer;     /* 讓滑鼠移上去時變成「手指」形狀 */
+    outline: none;       /* 去除點擊時的外框 */
+    transition: all 0.3s ease;
+}
+/* 加上一點互動效果，讓它看起來更像按鈕 */
+.e {
+    margin-top: 5px;
+    text-align: center;
+    font-size: 40px;
+    margin-right: 1140px;
+    color: #ffffff;
+    font-weight: 900;
+    font-family: 'Silkscreen', sans-serif;
+}
+
+/* 1. 先定義一個通用的「準備登場」樣式 */
+/* 1. 先定義一個通用的「準備登場」樣式 */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px); /* 初始位置往下移 50px */
+    transition: all 0.9s ease-out; /* 設定平滑過渡 */
+}
+
+/* 2. 定義「登場」後的樣式 */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0); /* 回到原位 */
+}
+
+/* 3. 修改你原本的 class，移除 animation 並加入 reveal */
+/* 將原本的 opacity: 0; animation: ... 刪除或註釋掉 */
+
+/* 3. 修改你原本的 class，移除 animation 並加入 reveal */
+/* 將原本的 opacity: 0; animation: ... 刪除或註釋掉 */
+
+
+/*這是網站底下的*/
+
+/* --- [後來新增] 頁尾 Footer 樣式 --- */
+.site-footer {
+    background-color: #333; /* [後來新增] 參考圖片的深粉紫/酒紅色 */
+    color: white;
+    padding: 60px 5% 20px 5%;
+    margin-top: 100px; /* 與上方內容保持距離 */
+}
+
+.footer-container {
+    display: flex; /* [關鍵] 讓欄位橫向排列 */
+    justify-content: space-between; /* 均勻分配空間 */
+    flex-wrap: wrap; /* 手機版會自動換行 */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-column {
+    margin-left: 150px;
+    flex: 1; /* 每欄平均分配寬度 */
+    min-width: 200px; /* 寬度最小 200px */
+    margin-bottom: 30px;
+}
+
+.footer-column h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.footer-column ul {
+    list-style: none; /* 移除點點 */
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+    color: #e0e0e0; /* 連結顏色 */
+    text-decoration: none; /* 移除底線 */
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+/* [後來新增] 連結滑鼠懸停效果 */
+.footer-column ul li a:hover {
+    color: #b7ffdc; /* 變回你的品牌薄荷綠 */
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* 一條淡淡的分隔線 */
+    font-size: 0.8rem;
+    color: #cccccc;
+}
+
+

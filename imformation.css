@@ -1,0 +1,231 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    /* 背景：從右到左的薄荷綠漸層 */
+    background: linear-gradient(to left, #301374, #000000);
+    font-family: 'Segoe UI', 'Montserrat', 'cheee', 'sheko', sans-serif;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* --- 導覽列 Navbar --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: rgba(255, 255, 255, 0.4); /* 半透明白 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* --- 導覽列按鈕 --- */
+.btn-home {
+    background-color: #abb2ec;
+    color: #301374;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-imformation {
+    background-color: #abb2ec;
+    color: #301374;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: 900;
+}
+
+.btn-imformation:hover {
+    background-color: #abb2ec;
+    transform: scale(1.1);
+}
+
+.btn-go {
+    background-color: #abb2ec;
+    color: #301374;
+    text-decoration: none;
+    padding: 8px 25px;
+    border-radius: 12px;
+    font-weight: 900;
+    transition: 0.3s;
+}
+
+.btn-home:hover, .btn-go:hover {
+    background-color: #abb2ec;
+    transform: scale(1.1);
+}
+
+.t {
+    margin-top: 100px;
+    margin-left: 200px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.n {
+    color: #ffdb11;
+    font-size: 60px;
+    font-family: 'Bungee', sans-serif;
+    opacity: 0;
+    animation: fadeInUp 0.9s ease-out 0s forwards;
+}
+
+.l {
+    font-family: 'Bungee', sans-serif;
+    color: #bbb282;
+    font-size: 40px;
+    margin-top: -20px;
+    opacity: 0;
+    animation: fadeInUp 0.9s ease-out 0s forwards;
+}
+
+.s {
+    color: #ffffff;
+    margin-top: 90px;
+    letter-spacing: 2px;
+    font-family: 'Michroma', sans-serif;
+}
+
+.c {
+    color: #ffffff;
+    margin-top: 30px;
+    letter-spacing: 2px;
+    font-family: 'Michroma', sans-serif;
+}
+
+.m {
+    opacity: 0;
+    animation: fadeInUp 0.9s ease-out 0.3s forwards;
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 圖片容器 */
+.img-container {
+  margin-top: 200px;
+  width: 1920px;        /* 您可以自定義容器寬度 */
+  height: 400px;       /* 您可以自定義容器高度 */
+  overflow: hidden;    /* 關鍵：隱藏超出容器的部分 */
+}
+
+/* 圖片本身 */
+.zoom-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* 確保圖片填滿容器且不變形 */
+  transition: transform 1s ease; /* 讓縮放效果平滑 (0.5秒) */
+  opacity: 0.6;
+}
+
+/* 滑鼠懸停 (Hover) 時的效果 */
+.img-container:hover .zoom-img {
+  transform: scale(1.03); /* 放大 1.2 倍，可依需求調整 */
+  cursor: zoom-in;       /* 滑鼠變成放大鏡符號（選用） */
+}
+
+
+
+
+.site-footer {
+    background-color: #333; /* [後來新增] 參考圖片的深粉紫/酒紅色 */
+    color: white;
+    padding: 60px 5% 20px 5%;
+    margin-top: 100px; /* 與上方內容保持距離 */
+}
+
+.footer-container {
+    display: flex; /* [關鍵] 讓欄位橫向排列 */
+    justify-content: space-between; /* 均勻分配空間 */
+    flex-wrap: wrap; /* 手機版會自動換行 */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-column {
+    margin-left: 150px;
+    flex: 1; /* 每欄平均分配寬度 */
+    min-width: 200px; /* 寬度最小 200px */
+    margin-bottom: 30px;
+}
+
+.footer-column h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.footer-column ul {
+    list-style: none; /* 移除點點 */
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+    color: #e0e0e0; /* 連結顏色 */
+    text-decoration: none; /* 移除底線 */
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+/* [後來新增] 連結滑鼠懸停效果 */
+.footer-column ul li a:hover {
+    color: #b7ffdc; /* 變回你的品牌薄荷綠 */
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* 一條淡淡的分隔線 */
+    font-size: 0.8rem;
+    color: #cccccc;
+}
+
+/*做出往滑效果*/
+.reveal {
+    opacity: 0;
+    transform: translateY(50px); /* 初始位置往下移 50px */
+    transition: all 0.9s ease-out; /* 設定平滑過渡 */
+}
+
+/* 2. 定義「登場」後的樣式 */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0); /* 回到原位 */
+}

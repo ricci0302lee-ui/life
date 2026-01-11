@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ricci's Website - Dark Edition</title>
+    <link rel="stylesheet" href="learn.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">Ricci32lee made</div>
+    <nav class="nav-links">
+        <a href="index.html" class="btn-home">
+            <i class="fa-solid fa-house"></i>
+        </a>
+        <a href="imformation.html" class="btn-imformation">
+            <i>i</i>
+        </a>
+        <a href="learn.html" class="btn-go">GO</a>
+    </nav>
+</header>
+
+<main class="content-wrapper">
+    <div class="side-box">
+        <div class="editor-header">Editor: Chinese (Top) / English (Bottom)</div>
+        
+        <div class="code-container">
+            <div class="line-numbers" id="ln-zh"></div>
+            <textarea class="code-input" id="input-zh" placeholder="在此填入中文單字" spellcheck="false"></textarea>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="code-container">
+            <div class="line-numbers" id="ln-en"></div>
+            <textarea class="code-input" id="input-en" placeholder="在此填入對應英文" spellcheck="false"></textarea>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="title-row">
+            <button class="btn-generate" onclick="generateTest()">Generate</button>
+            <h2 class="sub-title">Memorizing Words</h2>
+        </div>
+        
+        <div class="test-container" id="test-display">
+            <div class="placeholder-text">請在左側輸入單字後，按下 Generate 開始測驗</div>
+        </div>
+    </div>
+</main>
+<script src="learn.js"></script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+/* 全域設定 - 深色背景 */
+body {
+    min-height: 100vh;
+    margin: 0;
+    /* 從黑色漸層到深紫色 #301374 */
+    background: linear-gradient(to left, #301374, #000000);
+    font-family: 'Segoe UI', 'Montserrat', sans-serif;
+    color: #ffffff; /* 主要文字轉為白色 */
+
+}
+
+
+
+/* 導覽列 - 調整為深色玻璃質感 */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: rgba(255, 255, 255, 0.4); /* 半透明白 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* --- 導覽列按鈕 --- */
+.btn-home {
+    background-color: #abb2ec;
+    color: #301374;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-imformation {
+    background-color: #abb2ec;
+    color: #301374;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: 900;
+}
+
+.btn-imformation:hover {
+    background-color: #abb2ec;
+    transform: scale(1.1);
+}
+
+.btn-go {
+    background-color: #abb2ec;
+    color: #301374;
+    text-decoration: none;
+    padding: 8px 25px;
+    border-radius: 12px;
+    font-weight: 900;
+    transition: 0.3s;
+}
+
+.btn-home:hover, .btn-go:hover {
+    background-color: #abb2ec;
+    transform: scale(1.1);
+}
+
+
+/* 內容佈局 */
+.content-wrapper {
+    display: flex;
+    padding: 40px 5%;
+    gap: 40px;
+}
+
+/* 左側編輯器 - 深色樣式 */
+.side-box {
+    width: 33vw;
+    aspect-ratio: 1 / 1.2;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.editor-header {
+    background: #1a1a1a;
+    color: #b085ff; /* 紫色調標題 */
+    font-size: 11px;
+    padding: 8px 15px;
+    font-family: monospace;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.code-container {
+    display: flex;
+    flex: 1;
+    background-color: rgba(20, 20, 20, 0.6);
+    overflow-y: auto;
+}
+
+.line-numbers {
+    width: 35px;
+    padding: 10px 5px;
+    text-align: right;
+    color: #707070;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    background: rgba(255,255,255,0.05);
+    border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+/* 隱藏 Chrome, Safari, Edge 的捲軸 */
+.code-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* 隱藏 Firefox 的捲軸 */
+.code-container {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.code-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.55;
+    resize: none;
+    color: #e0e0e0;
+    
+    /* 確保輸入框自己不會跳出捲軸 */
+    overflow: hidden; 
+}
+
+.divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+}
+
+/* 右側測驗區 */
+.hero {
+    flex: 1;
+}
+
+.title-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.btn-generate {
+    background-color: #b085ff; /* 亮紫色 */
+    color: #ffffff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 12px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    box-shadow: 0 4px 15px rgba(176, 133, 255, 0.3);
+}
+
+.btn-generate:hover {
+    background-color: #cbb0ff;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(176, 133, 255, 0.5);
+}
+
+.sub-title {
+    color: #ffbc04; /* 保持金色作為亮點 */
+    font-size: 2.5rem;
+    margin: 0;
+    font-weight: 400;
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+    font-family: 'Bungee', sans-serif;
+}
+
+.test-container {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    height: 500px;
+    overflow-y: auto;
+    padding: 30px;
+}
+
+.placeholder-text {
+    color: #777;
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* 測驗項目樣式 */
+.test-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 15px;
+    color: #ffffff;
+}
+
+.test-input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #301374;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 5px;
+    font-size: 1.1rem;
+    color: #ffffff;
+    outline: none;
+    transition: 0.3s;
+}
+
+.test-input:focus {
+    border-bottom-color: #b085ff;
+}
+
+/* 動畫 */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
