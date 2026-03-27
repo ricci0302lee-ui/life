@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Game🎃</title>
+    <style>
+        :root {
+            --bg: #000000;
+            --card-bg: #64390c;
+            --flipped-bg: #9b5914;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .game-container {
+            text-align: center;
+            position: relative;
+        }
+
+        .stats {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            text-align: left;
+            margin-left: 20px;
+            align-self: flex-start;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            gap: 35px;
+            margin: 0 auto;
+        }
+
+        .card {
+            margin: -10px;
+            width: 120px;
+            height: 120px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            transition: background 0.4s ease;
+        }
+
+        .card.is-flipped {
+            background: var(--flipped-bg);
+        }
+
+        .card.is-matched {
+            background: #333;
+            cursor: default;
+        }
+
+        .content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        /* 初始蓋板表情 */
+        .cover {
+            user-select: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.4rem;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+        }
+
+        /* 真正表情 */
+        .reveal {
+            user-select: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.8rem;
+            opacity: 0;
+            transform: translateY(80px) scale(0.6);
+            transition: all 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            z-index: 1;
+        }
+
+        /* 翻開時 */
+        .card.is-flipped .cover {
+            transform: translateY(-38px) scale(0.62);
+            opacity: 0.9;
+        }
+
+        .card.is-flipped .reveal {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* 配對成功時 */
+        .card.is-matched .cover {
+            transform: translateY(-65px) scale(0.35);
+            opacity: 0;
+        }
+
+        .card.is-matched .reveal {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        /* Unmasked 掉落文字 */
+        .unmasked-text {
+            user-select: none;
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 5rem;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 0 140px rgba(0,0,0,1), 0 6px 100px rgba(0,0,0,1), 0 0px 10px rgba(0,0,0,1);
+            pointer-events: none;
+            opacity: 0;
+            z-index: 200;
+            transition: all 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+            white-space: nowrap;
+        }
+
+        .unmasked-text.show {
+            top: 90px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+<div class="game-container">
+    <div class="stats">Error: <span id="errors">0</span></div>
+    <div class="board" id="board"></div>
+    
+    <!-- Unmasked 掉落文字 -->
+    <div class="unmasked-text" id="unmasked">Unmasked</div>
+</div>
+<p><br>Halloween Version Game!</p>
+
+<script>
+const coverEmojis = ['😈', '👽', '🎃', '👁️', '🤡', '💀', '👺', '🤖', '👻', '🐸', '🐍', '😺'];
+    const revealPairs = ['🙂', '😁', '😄', '😉', '😍', '🤗'];
+
+    let gameData = [];
+    let flippedCards = [];
+    let errors = 0;
+    let matchedPairs = 0;
+
+    const board = document.getElementById('board');
+    const errorDisplay = document.getElementById('errors');
+    const unmaskedText = document.getElementById('unmasked');
+
+    function shuffle(array) {
+        return array.sort(() => Math.random() - 0.5);
+    }
+
+    function createGameData() {
+        gameData = [];
+        revealPairs.forEach(emoji => {
+            gameData.push({ cover: '', reveal: emoji });
+            gameData.push({ cover: '', reveal: emoji });
+        });
+
+        let shuffledCovers = shuffle([...coverEmojis]);
+        gameData.forEach((item, i) => {
+            item.cover = shuffledCovers[i];
+        });
+
+        gameData = shuffle(gameData);
+    }
+
+    function createBoard() {
+        board.innerHTML = '';
+        createGameData();
+        flippedCards = [];
+        errors = 0;
+        matchedPairs = 0;
+        errorDisplay.textContent = '0';
+        board.style.transform = 'none';
+
+        gameData.forEach((item) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.dataset.reveal = item.reveal;
+
+            card.innerHTML = `
+                <div class="content">
+                    <div class="cover">${item.cover}</div>
+                    <div class="reveal">${item.reveal}</div>
+                </div>
+            `;
+
+            card.addEventListener('click', () => flipCard(card));
+            board.appendChild(card);
+        });
+    }
+
+    function flipCard(card) {
+        if (flippedCards.length < 2 && 
+            !card.classList.contains('is-flipped') && 
+            !card.classList.contains('is-matched')) {
+            
+            card.classList.add('is-flipped');
+            flippedCards.push(card);
+
+            if (flippedCards.length === 2) {
+                checkMatch();
+            }
+        }
+    }
+
+    function checkMatch() {
+        const [card1, card2] = flippedCards;
+
+        if (card1.dataset.reveal === card2.dataset.reveal) {
+            card1.classList.add('is-matched');
+            card2.classList.add('is-matched');
+            matchedPairs++;
+
+            flippedCards = [];
+
+            if (matchedPairs === revealPairs.length) {
+                setTimeout(showUnmasked, 700);
+            }
+        } else {
+            errors++;
+            errorDisplay.textContent = errors;
+
+            setTimeout(() => {
+                card1.classList.remove('is-flipped');
+                card2.classList.remove('is-flipped');
+                flippedCards = [];
+            }, 1100);
+        }
+    }
+
+    function showUnmasked() {
+        // 背景變暗 + 卡片往下擠
+        document.body.style.filter = 'brightness(0.45)';
+
+        // Unmasked 掉下來
+        unmaskedText.classList.add('show');
+
+        // 3秒後彈起來消失
+        setTimeout(() => {
+            unmaskedText.classList.add('bounce');
+
+            // 彈起後恢復亮度並開始下一局
+            setTimeout(() => {
+                document.body.style.filter = 'none';
+                board.style.transform = 'none';
+                unmaskedText.classList.remove('show', 'bounce');
+                
+                // 自動開始下一局
+                createBoard();
+            }, 850);
+        }, 1000);
+    }
+
+    // 初始開始
+    createBoard();
+</script>
+
+</body>
+</html>
